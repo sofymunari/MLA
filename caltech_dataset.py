@@ -61,7 +61,23 @@ class Caltech(VisionDataset):
 
         print(self.images.size())
                     
-                    
+    def __makesplit__ (self):
+        self.trainsplit=[]
+        self.validsplit=[]
+        count=0
+        for i in range(0,self.images.size()) :
+            if count<2 :
+                self.trainsplit.append(i)
+                count+=1
+            else :
+                self.validsplit.append(i)
+                count=0
+                
+    def __trainsplit__(self):        
+        return self.trainsplit
+    
+    def __validsplit__ (self):
+        return self.validsplit
 			
 
     def __getitem__(self, index):
