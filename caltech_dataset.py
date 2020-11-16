@@ -33,7 +33,7 @@ class Caltech(VisionDataset):
         curlab=""
         self.images=[]
         if(self.split=='train'):
-            f=open('train.txt');
+            f=open('MLA/train.txt');
             lines= f.readlines();
             for line in lines:
                 if line.startswith("BACKGROUND_Google")== False:
@@ -46,7 +46,7 @@ class Caltech(VisionDataset):
                             curlab=parts[0]
                     self.images.append(pil_loader(line),label)
         else:
-            f=open('test.txt');
+            f=open('MLA/test.txt');
             lines= f.readlines();
             for line in lines:
                 if line.startswith("BACKGROUND_Google")== False:
