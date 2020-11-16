@@ -31,7 +31,7 @@ class Caltech(VisionDataset):
         '''
         label=0
         curlab=""
-        self.images
+        self.images=[]
         if(self.split=='train'):
             f=open('train.txt');
             lines= f.readlines();
@@ -44,7 +44,7 @@ class Caltech(VisionDataset):
                         if curlab!=parts[0]:
                             label=label+1
                             curlab=parts[0]
-                    self.images.add(pil_loader(line),label)
+                    self.images.append(pil_loader(line),label)
         else:
             f=open('test.txt');
             lines= f.readlines();
@@ -73,7 +73,7 @@ class Caltech(VisionDataset):
                 self.validsplit.append(i)
                 count=0
                 
-    def __trainsplit__(self):        
+    def __trainsplit__ (self):        
         return self.trainsplit
     
     def __validsplit__ (self):
