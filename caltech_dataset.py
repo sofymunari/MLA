@@ -27,8 +27,42 @@ class Caltech(VisionDataset):
         - PyTorch Dataset classes use indexes to read elements
         - You should provide a way for the __getitem__ method to access the image-label pair
           through the index
-        - Labels should start from 0, so for Caltech you will have lables 0...100 (excluding the background class) 
+        - Labels should start from 0, so for Caltech you will have lables 0...100 (excluding the background class)
         '''
+        label=0
+        curlab=""
+        self.images
+        if(self.split=='train'):
+            f=open('train.txt');
+            lines= f.readlines();
+            for line in lines:
+                if line.startswith("BACKGROUND_Google")== False:
+                    parts=line.split('/')
+                    if curlab=="":
+                        curlab=parts[0]
+                    else:
+                        if curlab!=parts[0]:
+                            label=label+1
+                            curlab=parts[0]
+                    self.images.add(pil_loader(line),label)
+        else:
+            f=open('test.txt');
+            lines= f.readlines();
+            for line in lines:
+                if line.startswith("BACKGROUND_Google")== False:
+                    parts=line.split('/')
+                    if curlab=="":
+                        curlab=parts[0]
+                    else:
+                        if curlab!=parts[0]:
+                            label=label+1
+                            curlab=parts[0]
+                    self.images.append(pil_loader(line),label)
+
+        print(self.images.size())
+                    
+                    
+			
 
     def __getitem__(self, index):
         '''
@@ -40,8 +74,8 @@ class Caltech(VisionDataset):
             tuple: (sample, target) where target is class_index of the target class.
         '''
 
-        image, label = ... # Provide a way to access image and label via index
-                           # Image should be a PIL Image
+        image, label = self.images[index]   # Provide a way to access image and label via index
+                                               # Image should be a PIL Image
                            # label can be int
 
         # Applies preprocessing when accessing the image
@@ -55,5 +89,5 @@ class Caltech(VisionDataset):
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
         '''
-        length = ... # Provide a way to get the length (number of elements) of the dataset
+        length = self.images.size() # Provide a way to get the length (number of elements) of the dataset
         return length
