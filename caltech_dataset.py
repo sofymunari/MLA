@@ -66,7 +66,7 @@ class Caltech(VisionDataset):
                     self.labels.append(label)
                     self.images.append(pil_loader(path1))
 
-        print(self.images.size())
+       
                     
     def __makesplit__ (self):
         self.trainsplit=[]
@@ -112,5 +112,5 @@ class Caltech(VisionDataset):
         The __len__ method returns the length of the dataset
         It is mandatory, as this is used by several other components
         '''
-        length = self.images.size() # Provide a way to get the length (number of elements) of the dataset
+        length = len(self.images) # Provide a way to get the length (number of elements) of the dataset
         return length
