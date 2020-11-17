@@ -72,7 +72,7 @@ class Caltech(VisionDataset):
         self.trainsplit=[]
         self.validsplit=[]
         count=0
-        for i in range(0,self.images.size()) :
+        for i in range(0,len(self.images)) :
             if count<2 :
                 self.trainsplit.append(i)
                 count+=1
