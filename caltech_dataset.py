@@ -33,7 +33,7 @@ class Caltech(VisionDataset):
         curlab=""
         self.images=[]
         if(self.split=='train'):
-            f=open('MLA/train.txt','rb');
+            f=open('MLA/train.txt');
             lines= f.readlines();
             for line in lines:
                 if line.startswith("BACKGROUND_Google")== False:
