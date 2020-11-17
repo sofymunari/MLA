@@ -47,6 +47,7 @@ class Caltech(VisionDataset):
                             curlab=parts[0]
                     line1=line.split('\n')
                     path1=root+"/"+line1[0]
+                    print(label);
                     self.images.append(pil_loader(path1))
                     self.labels.append(label)
         else:
