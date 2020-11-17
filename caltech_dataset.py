@@ -32,6 +32,7 @@ class Caltech(VisionDataset):
         label=0
         curlab=""
         self.images=[]
+        self.labels=[]
         if(self.split=='train'):
             f=open('MLA/train.txt');
             lines= f.readlines();
@@ -46,7 +47,8 @@ class Caltech(VisionDataset):
                             curlab=parts[0]
                     line1=line.split('\n')
                     path1=root+"/"+line1[0]
-                    self.images.append(pil_loader(path1),label)
+                    self.images.append(pil_loader(path1))
+                    self.labels.append(label)
         else:
             f=open('MLA/test.txt');
             lines= f.readlines();
@@ -61,7 +63,8 @@ class Caltech(VisionDataset):
                             curlab=parts[0]
                     line1=line.split('\n')
                     path1=root+"/"+line1[0]
-                    self.images.append(pil_loader(path1),label)
+                    self.labels.append(label)
+                    self.images.append(pil_loader(path1))
 
         print(self.images.size())
                     
@@ -94,8 +97,8 @@ class Caltech(VisionDataset):
             tuple: (sample, target) where target is class_index of the target class.
         '''
 
-        image, label = self.images[index]   # Provide a way to access image and label via index
-                                               # Image should be a PIL Image
+        image= self.images[index]   # Provide a way to access image and label via index
+        label= self.labels[index]                                          # Image should be a PIL Image
                            # label can be int
 
         # Applies preprocessing when accessing the image
