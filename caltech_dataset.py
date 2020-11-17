@@ -44,7 +44,8 @@ class Caltech(VisionDataset):
                         if curlab!=parts[0]:
                             label=label+1
                             curlab=parts[0]
-                    path1=root+"/"+line
+                    line1=line.split('\n')
+                    path1=root+"/"+line1[0]
                     self.images.append(pil_loader(path1),label)
         else:
             f=open('MLA/test.txt');
@@ -58,7 +59,8 @@ class Caltech(VisionDataset):
                         if curlab!=parts[0]:
                             label=label+1
                             curlab=parts[0]
-                    path1=root+"/"+line
+                    line1=line.split('\n')
+                    path1=root+"/"+line1[0]
                     self.images.append(pil_loader(path1),label)
 
         print(self.images.size())
